@@ -1,10 +1,10 @@
 import axios from "axios";
+
 export default {
     namespaced: true,
     state: {
         products: [],
-        getid: [],
-        cart: [],
+        product: []
     },
     getters: {
         getProduct: state => state.products
@@ -12,33 +12,30 @@ export default {
     actions: {
         async fetchProduct({ commit }) {
             try {
-                const dataProduct = await axios.get("https://ecommerce.olipiskandar.com/api/v1/product/search")
-                commit('SET_PRODUCT', dataProduct.data)
+                const dataProduct = await axios.get("https://ecommerce.olipiskandar.com/api/v1/product/latest/20")
+                commit('SET_PRODUCT', dataProduct.data.data)
+                // console.log(dataProduct.data.data)
             } catch (error) {
                 alert("Ada error");
                 console.log(error);
             }
         },
-        async fetchProductById({ commit }, slug) {
+        async fetchProductBySlug({ commit }, product_slug) {
             try {
-                const dataProduct = await axios.get(`https://ecommerce.olipiskandar.com/api/v1/product/details/${slug}`)
-                commit('SET_PRODUCT_BY_ID', dataProduct.data)
+                const dataProduct = await axios.get(`https://ecommerce.olipiskandar.com/api/v1/product/details/${product_slug}`)
+                commit('SET_PRODUCT_BY_SLUG', dataProduct.data.data)
             } catch (error) {
                 alert("Ada error");
                 console.log(error);
             }
-        },
-
+        }
     },
     mutations: {
         SET_PRODUCT(state, products) {
             state.products = products
         },
-        SET_PRODUCT_BY_ID(state, products) {
-            state.getid = products
-        },
-        SET_KERANJANG_GET(state, cart){
-            state.cart = cart;
-        },
+        SET_PRODUCT_BY_SLUG(state, products) {
+            state.product = products
+        }
     }
 }
