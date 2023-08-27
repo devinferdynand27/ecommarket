@@ -10,12 +10,12 @@
                         Brands total : {{ brands.length }}
                     </p>
                 </div>
-                <div class="flex flex-wrap justify-center">
-                    <div v-for="brand in brands">
+                <div class="flex flex-wrap justify-center" >
+                    <div v-for="brand in brands" :key="brand.id">
                         <!-- <RouterLink :to="'/brand/' + brand"> -->
-                        <div class="m-3 w-[250px] group hover:shadow-md bg-white hover:bg-gray-100 dark:bg-gray-900 dark:hover:bg-gray-500 dark:hover:bg-opacity-[.5] transition-all border cursor-pointer rounded-t-lg rounded-b-lg">
+                        <div style="background: white; border: 2px solid orange;"  class="m-3 w-[250px] group hover:shadow-md bg-white hover:bg-gray-100 dark:hover:bg-gray-500 dark:hover:bg-opacity-[.5] transition-all border cursor-pointer rounded-t-lg rounded-b-lg">
 
-                            <div class="my-5">
+                            <div class="my-5" style="color: black;">
                                 <h2 class="text-center text-xl font-semibold">{{ brand.name }}</h2>
                                 <h2 class="text-center text-lg">{{ brand.slug }}</h2>
                             </div>

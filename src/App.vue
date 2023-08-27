@@ -14,9 +14,6 @@ import HelloWorld from './components/HelloWorld.vue'
       <FooterComponent></FooterComponent>
     </div>
   </div>
-  <div>
-    <CartSide></CartSide>
-  </div>
 </template>
 
 <script>

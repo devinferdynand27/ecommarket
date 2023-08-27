@@ -1,27 +1,26 @@
 import axios from "axios";
-
 export default {
     namespaced: true,
     state: {
-        categories: []
+        kategori: [],
     },
     getters: {
-        getCategories: state => state.categories
+        getKategori: state => state.kategori
     },
     actions: {
-        async fetchCategories({ commit }) {
+        async fetchKategori({ commit }) {
             try {
-                const dataCategory = await axios.get("https://ecommerce.olipiskandar.com/api/v1/all-categories")
-                commit('SET_CATEGORIES', dataCategory.data.data.slice(0, 20))
+                const datakategori = await axios.get("https://ecommerce.olipiskandar.com/api/v1/all-categories")
+                commit('SET_KATEGORI', datakategori.data.data.slice(0,20))
             } catch (error) {
                 alert("Ada error");
                 console.log(error);
             }
-        }
+        },
     },
     mutations: {
-        SET_CATEGORIES(state, categories) {
-            state.categories = categories
-        }
+        SET_KATEGORI(state, kategori) {
+            state.kategori = kategori
+        },
     }
 }

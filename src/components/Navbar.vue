@@ -1,7 +1,7 @@
 <template>
     <div>
         <nav style="background: white;"
-            class="bg-white dark:bg-white-900 w-full top-0 left-0 border-b border-gray-200 dark:border-white-600 bg-opacity-[.6] backdrop-blur-sm dark:bg-opacity-[.7]">
+            class="bg-white shadow dark:bg-white-900 w-full top-0 left-0 border-b border-gray-200 dark:border-white-600 bg-opacity-[.6] backdrop-blur-sm dark:bg-opacity-[.7]">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="https://ridwannurfauzi.github.io/" class="flex items-center">
                    
@@ -9,10 +9,11 @@
                 </a>
                 <div class="flex md:order-2">
                     <div v-if="isAuthenticated"  class="mr-8 relative">
-                        <button @click="toggle_cartside" style="background: orange;"
+                        <button @click="cart"  style="background: orange;"
                             class="h-full flex flex-wrap px-3 justify-center items-center align-middle hover:bg-slate-400 hover:bg-opacity-50 dark:text-white rounded-xl transition-all">
-                            <i class="bi bi-cart text-xl font-semibold"></i>
+                            <i class="bi bi-cart text-xl font-semibold" v-if=" cart.cart_items != undefined"> {{ cart.cart_items.data.length }} </i>
                         </button>
+                    
                         <div  style="background: orange;" v-if="cart.cart_items != undefined && cart.cart_items.data.length > 0"
                             class="absolute text-sm bottom-full left-full -translate-x-[50%] translate-y-[50%] bg-yellow-500 dark:bg-yellow-500 dark:bg-opacity-80 text-white px-2 rounded-md">
                         </div>
@@ -42,13 +43,8 @@
                 </div>
                 <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
-                        <li style="color: black;" class="mt-2">
-                            <RouterLink to="/" :class="setActivedNavClass(rl[1])">
-                                Home
-                            </RouterLink>
-                        </li>
                         <li  style="color: black;" class="mt-2">
-                            <RouterLink to="/product" :class="setActivedNavClass(rl[2])">
+                            <RouterLink to="/" :class="setActivedNavClass(rl[2])">
                                 Product
                             </RouterLink>
                         </li>
