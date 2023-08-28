@@ -42,9 +42,9 @@
                     </button>
 
 
-                    <button  style="background: orange;" v-on:click="_logout()" v-if="isAuthenticated && userdata.user != undefined"
+                    <button  style="background: orange;" @click="profil()" v-if="isAuthenticated "
                     class="hidden md:block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                    {{ userdata.user.name }}
+                    <i class="bi bi-person"></i>
                    </button>
                    
                     
@@ -89,10 +89,6 @@
                         <li class="mt-2">
 
                             
-                        <button  v-if="isAuthenticated && userdata.user != undefined"
-                            class="visible md:hidden text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                            {{ userdata.user.name }}
-                        </button>
                             
                             <router-link  to="/login" v-if="isAuthenticated != true"
                                 class="visible md:hidden text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -108,6 +104,11 @@
                             <button v-on:click="_logout()" v-if="isAuthenticated"
                                 class="visible md:hidden text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
                                 Keluar
+                            </button>
+                             
+                            <button v-on:click="profil()" v-if="isAuthenticated"
+                                class="visible md:hidden text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
+                               Profil   <i class="bi bi-person"></i>
                             </button>
 
 
@@ -144,6 +145,9 @@ export default {
         // console.log(localStorage.getItem('token'))
     },
     methods: {
+        profil(){
+            this.$router.push('/profile');
+        },
         ...mapActions('auth',['getusertoken']),
         ...mapActions('auth', ['logout']),
         ...mapActions('cart', ['toggle_cartside']),

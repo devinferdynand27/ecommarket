@@ -56,7 +56,8 @@ const router = createRouter({
       path: '/checkout',
       name: 'checkout',
       component: () => import('../views/CheckoutView.vue'),
-      beforeEnter: cekToken
+      beforeEnter: cekToken,
+      props:true
     },
     {
       path: '/login',

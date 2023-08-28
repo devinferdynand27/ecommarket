@@ -18,7 +18,7 @@ const auth = {
                 const token = response.data.access_token;
                 if(token == undefined){
                     this.$router.push('/login');
-                    location.reload()
+                    // location.reload()
                 }
                 localStorage.setItem("token", token);
                 commit("SET_TOKEN", token);
