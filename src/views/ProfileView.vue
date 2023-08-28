@@ -21,9 +21,6 @@ computed:{
     ...mapGetters('auth',['isAuthenticated']),
    
 },
-created() {
-   this.getusertoken(localStorage.token)
-},
 
 }
 </script>

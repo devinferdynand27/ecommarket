@@ -26,34 +26,33 @@
   </div>
   <div v-else>
     <br>
-   
-    <center>
+    <!-- <div class="container">
+      <div v-if=" isAuthenticated && userdata.user != undefined">
+        <b  style="float: left; padding-left: 30px;">{{ userdata.user.name }}</b> 
+       </div>
+    </div><br> -->
+    <center> 
+      <div class="container">
+        <b  style="float: left; padding-left: 30px;">Kategori</b>
+        <router-link to="/category">
+          <a style="float: right; padding-right: 30px;"> Semua Kategori &nbsp; <i class="bi bi-arrow-right-square-fill"></i> </a>
+        </router-link>
+      </div>
+      <br>  <br>
       <div class="container">
         <div class="flex flex-col " data-controller="slider">
           <div class="flex overflow-x-scroll  no-scollbar" data-slider-target="scrollContainer">
-            <div class="  px-4 flex-shrink-0" data-slider-target="image">
-              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
-            </div>
-            <div class="  px-4 flex-shrink-0" data-slider-target="image">
-              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
-            </div>
-            <div class="  px-4 flex-shrink-0" data-slider-target="image">
-              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
-            </div>
-            <div class="  px-4 flex-shrink-0" data-slider-target="image">
-              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
-            </div>
-            <div class="  px-4 flex-shrink-0" data-slider-target="image">
-              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
-            </div>
-            <div class="  px-4 flex-shrink-0" data-slider-target="image">
-              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
+            <div v-for="item in getKategoriHome" :key="item.name" class="px-4 flex-shrink-0" data-slider-target="image">
+              <img style="width: 150px; border-radius: 20px;" :src="item.banner" />
             </div>
           </div>
         </div>
       </div>
     </center>
+    <br>
 
+
+    
     <br>
     <div class="bg-white">
       <div class="mx-auto max-w-1xl px-4 py-2 lg:max-w-7xl lg:px-7">
@@ -120,7 +119,7 @@
               </div>
               <center>
                 <br />
-                <button
+                <button 
                   type="button"
                   style="background: orange"
                   class="inline-block rounded px-12 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
@@ -135,14 +134,25 @@
       </div>
     </div>
   </div>
-  
 </template>
 <script>
 import { onMounted } from "vue";
-import { mapGetters, mapState } from "vuex";
+import { mapGetters, mapState , mapActions } from "vuex";
 export default {
+  methods:{
+    ...mapActions('auth',['getusertoken']),
+      detail(){
+        console.log('detail')
+      }
+  },
+  created() {
+   this.getusertoken(localStorage.token)
+},
   computed: {
     ...mapGetters("product", ["getProduct"]),
+    ...mapGetters('category',['getKategoriHome']),
+    ...mapState('auth',['userdata']),
+    ...mapGetters('auth',['isAuthenticated']),
     show(){
     const application = Stimulus.Application.start()
   
@@ -177,6 +187,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("product/fetchProduct");
+    this.$store.dispatch('category/fetchKategoriHome')
   },
   setup(props, context) {
         onMounted(() => {

@@ -18,6 +18,7 @@ const auth = {
                 const token = response.data.access_token;
                 if(token == undefined){
                     this.$router.push('/login');
+                    location.reload()
                 }
                 localStorage.setItem("token", token);
                 commit("SET_TOKEN", token);
@@ -41,12 +42,12 @@ const auth = {
                 return error;
             }
         },
-        async getusertoken({commit}, token) {
+        async getusertoken({commit}, ) {
             try {
                 const response = await axios.get('https://ecommerce.olipiskandar.com/api/v1/user/info',
                  {
                     headers:{
-                        Authorization: `Bearer ${token}`
+                        Authorization: `Bearer ${localStorage.getItem('token')}`
                     }
                 })
                 commit('SET_TOKEN_user', response.data);
@@ -58,6 +59,7 @@ const auth = {
             const token = localStorage.getItem('token');
             localStorage.removeItem('token');
             commit("SET_TOKEN", token)
+            location.reload()
         }
     },  
     mutations: {

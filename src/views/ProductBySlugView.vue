@@ -26,7 +26,7 @@
   </div>
   <div v-else>
      <section class="text-gray-700 body-font overflow-hidden bg-white">
-         <div class="container px-5 py-24 mx-auto">
+         <div class="container px-5 py-6 mx-auto">
            <div class="lg:w-4/5 mx-auto flex flex-wrap">
              <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg">
              <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">

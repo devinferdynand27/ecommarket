@@ -10,6 +10,8 @@ function cekToken(to, from, next) {
   }
 };
 
+
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -32,7 +34,7 @@ const router = createRouter({
       path: '/product/detailproduct/:slug',
       name: 'productBySlug',
       component: () => import('../views/ProductBySlugView.vue'),
-      props: true
+      props: true,
     },
     {
       path: '/category',
@@ -48,7 +50,7 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: () => import('../views/ProfileView.vue'),
-      beforeEnter: cekToken
+    
     },
     {
       path: '/checkout',
