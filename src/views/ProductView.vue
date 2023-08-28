@@ -25,7 +25,36 @@
     </center>
   </div>
   <div v-else>
+    <br>
+   
+    <center>
+      <div class="container">
+        <div class="flex flex-col " data-controller="slider">
+          <div class="flex overflow-x-scroll  no-scollbar" data-slider-target="scrollContainer">
+            <div class="  px-4 flex-shrink-0" data-slider-target="image">
+              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
+            </div>
+            <div class="  px-4 flex-shrink-0" data-slider-target="image">
+              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
+            </div>
+            <div class="  px-4 flex-shrink-0" data-slider-target="image">
+              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
+            </div>
+            <div class="  px-4 flex-shrink-0" data-slider-target="image">
+              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
+            </div>
+            <div class="  px-4 flex-shrink-0" data-slider-target="image">
+              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
+            </div>
+            <div class="  px-4 flex-shrink-0" data-slider-target="image">
+              <img style="width: 150px; border-radius: 20px;" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hvZXN8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </center>
 
+    <br>
     <div class="bg-white">
       <div class="mx-auto max-w-1xl px-4 py-2 lg:max-w-7xl lg:px-7">
         <div 
@@ -44,7 +73,7 @@
               >
                 <img
                   v-if="product.thumbnail_image == ''"
-                  src="https://assemblee-nationale.ga/ministere/img/default-image.png"
+                  src="../assets/delfault.png"
                   alt="Front of men&#039;s Basic Tee in black."
                   class="h-full w-full object-cover object-center lg:h-full lg:w-full"
                 />
@@ -109,45 +138,57 @@
   
 </template>
 <script>
+import { onMounted } from "vue";
 import { mapGetters, mapState } from "vuex";
 export default {
   computed: {
     ...mapGetters("product", ["getProduct"]),
-    
+    show(){
+    const application = Stimulus.Application.start()
+  
+    application.register("slider", class extends Stimulus.Controller {
+      static get targets() {
+        return [ "scrollContainer", "image", "indicator" ]
+      }
+      initialize() {
+        this.observer = new IntersectionObserver(this.onIntersectionObserved.bind(this), {
+          root: this.scrollContainerTarget,
+          threshold: 0.5
+        })
+        this.imageTargets.forEach(image => {
+          this.observer.observe(image)
+        })
+      }
+
+      onIntersectionObserved(entries) {
+        entries.forEach(entry => {
+          if (entry.intersectionRatio > 0.5) {
+            const intersectingIndex = this.imageTargets.indexOf(entry.target)
+            this.indicatorTargets[intersectingIndex].classList.add("bg-blue-900")
+          }
+          else { 
+            const intersectingIndex = this.imageTargets.indexOf(entry.target)
+            this.indicatorTargets[intersectingIndex].classList.remove("bg-blue-900")
+          }
+        })
+      }
+    })
+    }
   },
   mounted() {
     this.$store.dispatch("product/fetchProduct");
   },
+  setup(props, context) {
+        onMounted(() => {
+            try {
+                context.emit("id-menu", 2)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    }
+    
+    
 };
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

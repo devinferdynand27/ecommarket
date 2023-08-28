@@ -50,6 +50,7 @@
     </div>
   </template>
   <script>
+  import { onMounted } from "vue";
   import { mapGetters } from "vuex";
   export default {
     computed: {
@@ -58,6 +59,15 @@
     mounted() {
       this.$store.dispatch("category/fetchKategori");
     },
+    setup(props, context) {
+        onMounted(() => {
+            try {
+                context.emit("id-menu", 3)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    }
   };
   </script>
   <style>

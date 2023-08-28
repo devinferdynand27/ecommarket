@@ -115,6 +115,7 @@
   </div>
 </template>
 <script>
+import { onMounted } from "vue";
 import { mapActions, mapGetters, mapState } from 'vuex'
 export default {
  data(){
@@ -148,7 +149,16 @@ export default {
              this.counter--;
        }
      }
- }
+ },
+ setup(props, context) {
+        onMounted(() => {
+            try {
+                context.emit("id-menu", 2)
+            } catch (error) {
+                console.log(error)
+            }
+        })
+    }
 }
 </script>
 

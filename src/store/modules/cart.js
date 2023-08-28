@@ -1,99 +1,100 @@
 import axios from "axios";
-
-const auth = {
-    namespaced: true,
-    state: {
-        cart: [],
-        showCartSide: false
+export default {
+  namespaced: true,
+  state: {
+    cart: [],
+  },
+  getters: {
+    getcart: (state) => state.cart,
+  },
+  actions: {
+    async getcartdata({ commit }) {
+      try {
+        const response = await axios.post(
+          "https://ecommerce.olipiskandar.com/api/v1/carts",
+          { Devin: "ganteng" },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        commit("SET_KERANJANG_GET", response.data);
+      } catch (error) {
+        alert("eror api cart");
+      }
     },
-    getters: {
-        getCart: (state) => state.cart
+    async addtocart({ commit, dispatch }, data) {
+      try {
+        const response = axios.post(
+          "https://ecommerce.olipiskandar.com/api/v1/carts/add",
+          {
+            variation_id: data.variation_id,
+            qty: data.qty,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        alert("berhasil");
+      } catch (error) {
+        alert("api addcart eror");
+      } finally {
+        dispatch("cart/getcartdata", localStorage.token, { root: true });
+      }
     },
-    actions: {
-        async fetchCartData({ commit }, token) {
-            try {
-                const response = await axios.post('https://ecommerce.olipiskandar.com/api/v1/carts',
-                    {},
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
-                commit("CART_INFO", response.data);
-            }
-            catch (err) {
-                console.log(err);
-                console.log({ success: false, err });
-                commit("CART_INFO", { success: false, err });
-            }
-        },
-        async addCartData({ commit, dispatch }, param) {
-            try {
-                const response = await axios.post('https://ecommerce.olipiskandar.com/api/v1/carts/add',
-                    param,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.token}`
-                        }
-                    });
-                alert("Berhasil menambah ke keranjang");
-            }
-            catch (err) {
-                console.log(err);
-                console.log({ success: false, err });
-            } finally {
-                dispatch('cart/fetchCartData', localStorage.token, {root: true});
-            }
-        },
-        async delete_cartData({ commit, dispatch }, cart_id) {
-            try {
-                const response = await axios.post('https://ecommerce.olipiskandar.com/api/v1/carts/destroy',
-                    {
-                        cart_id
-                    },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.token}`
-                        }
-                    });
-                console.log(response);
-            } catch (error) {
-                console.log(error)
-            }
-            finally {
-                dispatch('cart/fetchCartData', localStorage.token, {root: true});
-            }
-        },
-
-        async change_qty({ commit, dispatch }, param){
-            try {
-                const response = await axios.post('https://ecommerce.olipiskandar.com/api/v1/carts/change-quantity',
-                    param,
-                    {
-                        headers: {
-                            Authorization: `Bearer ${localStorage.token}`
-                        }
-                    });
-                console.log(response);
-            } catch (error) {
-                console.log(error);
-            } finally {
-                dispatch('cart/fetchCartData', localStorage.token, {root: true});
-            }
-        },
-
-        toggle_cartside({ commit }) {
-            commit("TOGGLE_CARTSIDE")
-        }
+    async deletecart({ commit, dispatch }, cart_id) {
+      try {
+        const response = axios.post(
+          "https://ecommerce.olipiskandar.com/api/v1/carts/destroy",
+          {
+            cart_id: cart_id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        alert("berhasil");
+      } catch (error) {
+        alert("api addcart eror");
+      } finally {
+        dispatch("cart/getcartdata", localStorage.token, { root: true });
+      }
     },
-    mutations: {
-        CART_INFO(state, cart) {
-            state.cart = cart;
-        },
-        TOGGLE_CARTSIDE(state) {
-            state.showCartSide = !state.showCartSide;
-        }
-    }
-}
-
-export default auth;
+    async editkuantiti({ commit, dispatch }, data) {
+      try {
+        const response = axios.post(
+          "https://ecommerce.olipiskandar.com/api/v1/carts/change-quantity",
+          {
+            cart_id: data.cart_id,
+            type: data.type,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+      } catch (error) {
+        alert("api addcart eror");
+      } finally {
+        dispatch("cart/getcartdata", localStorage.token, { root: true });
+      }
+    },
+    async belicheckout({ commit, getters },) {
+     let data = getters.getcart.cart_items.data
+     data.forEach(element => {
+         console.log(element.cart_id)
+     });
+    },
+  },
+  mutations: {
+    SET_KERANJANG_GET(state, cart) {
+      state.cart = cart;
+    },
+  },
+};

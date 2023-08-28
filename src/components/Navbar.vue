@@ -3,16 +3,21 @@
         <nav style="background: white;"
             class="bg-white shadow dark:bg-white-900 w-full top-0 left-0 border-b border-gray-200 dark:border-white-600 bg-opacity-[.6] backdrop-blur-sm dark:bg-opacity-[.7]">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <a href="https://ridwannurfauzi.github.io/" class="flex items-center">
+                <a href="#" class="flex items-center">
                    
-                    <span style="color: orange;" class="self-center text-xl font-semibold whitespace-nowrap dark:text-orange">ECOMARKET </span>
+                    <img src="../assets/logo.jpeg" style="width: 180px;" alt="">
+
+                    <!-- <span style="color: orange;" class="self-center text-xl font-semibold whitespace-nowrap dark:text-orange">ECOMARKET </span> -->
                 </a>
                 <div class="flex md:order-2">
                     <div v-if="isAuthenticated"  class="mr-8 relative">
-                        <button @click="cart"  style="background: orange;"
+                       
+                        <router-link to="/cart">
+                            <button   style="background: orange;"
                             class="h-full flex flex-wrap px-3 justify-center items-center align-middle hover:bg-slate-400 hover:bg-opacity-50 dark:text-white rounded-xl transition-all">
                             <i class="bi bi-cart text-xl font-semibold" v-if=" cart.cart_items != undefined"> {{ cart.cart_items.data.length }} </i>
                         </button>
+                        </router-link>
                     
                         <div  style="background: orange;" v-if="cart.cart_items != undefined && cart.cart_items.data.length > 0"
                             class="absolute text-sm bottom-full left-full -translate-x-[50%] translate-y-[50%] bg-yellow-500 dark:bg-yellow-500 dark:bg-opacity-80 text-white px-2 rounded-md">
@@ -20,15 +25,15 @@
                     </div>
                     <router-link to="/login" v-if="isAuthenticated != true"
                     style="background: orange;"   class="hidden md:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Login
+                        Masuk
                     </router-link>
                     <router-link  style="background: orange;" to="/register" v-if="isAuthenticated != true"
                         class="hidden md:block text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                        SignUp
+                        Daftar
                     </router-link>
                     <button  style="background: orange;" v-on:click="_logout()" v-if="isAuthenticated"
                         class="hidden md:block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">
-                        Logout
+                        Keluar
                     </button>
                     <button  style="background: orange;" type="button" id="nav-btn-toggle" @click="navToggle"
                         class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
@@ -45,12 +50,12 @@
                     <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium md:flex-row md:space-x-8 md:mt-0 md:border-0 ">
                         <li  style="color: black;" class="mt-2">
                             <RouterLink to="/" :class="setActivedNavClass(rl[2])">
-                                Product
+                                Produk
                             </RouterLink>
                         </li>
                         <li  style="color: black;" class="mt-2">
                             <RouterLink to="/category" :class="setActivedNavClass(rl[3])">
-                                Category
+                                Kategori
                             </RouterLink>
                         </li>
                         
@@ -87,7 +92,7 @@
             </div>
         </nav>
     </div>
-    <!-- {{ showCartSide }} -->
+    {{ getcartdata }}
 </template>
 
 <script>
@@ -104,7 +109,7 @@ export default {
         ...mapState('cart', ['cart']),
     },
     mounted() {
-        this.$store.dispatch("cart/fetchCartData", localStorage.getItem('token'))
+        this.$store.dispatch("cart/getcartdata", localStorage.getItem('token'))
         // console.log(localStorage.getItem('token'))
     },
     methods: {
@@ -116,6 +121,10 @@ export default {
                 this.logout();
                 this.$router.push('/login');
             }
+        },
+        cart(){
+            // this.$router.push('/cart');
+            console.log('apa')
         },
         navToggle() {
             $("#navbar-sticky").slideToggle();

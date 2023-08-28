@@ -1,82 +1,71 @@
 import axios from "axios";
-
 const auth = {
     namespaced: true,
     state: {
         token: localStorage.getItem('token') || '',
-        userData: []
+        userdata : [],
     },
     getters: {
         isAuthenticated: state => (!!state.token && state.token != 'undefined'),
     },
     actions: {
-        async login({ commit }, credentials) {
+        async login({commit}, credentials) {
             try {
                 const response = await axios.post(
                     "https://ecommerce.olipiskandar.com/api/v1/auth/login",
-                    credentials
+                     credentials
                 );
                 const token = response.data.access_token;
-
+                if(token == undefined){
+                    this.$router.push('/login');
+                }
                 localStorage.setItem("token", token);
                 commit("SET_TOKEN", token);
-                return response.data.success
+                return true
             } catch (error) {
-                console.log(error);
                 return error;
             }
         },
-        async getUserData({ commit }, token) {
-            let response;
-            try {
-                response = await axios.get('https://ecommerce.olipiskandar.com/api/v1/user/info',
-                    {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    });
-                // console.log(response.data);
-                commit("USER_INFO", response.data);
-                return response.data;
-            }
-            catch (err) {
-                console.log(err);
-                console.log({success: false, err});
-                commit("USER_INFO", {success: false, err});
-                return {success: false, err};
-            }
-        },
-        async signup({ commit }, credentials) {
+        async register({commit}, credentials) {
             try {
                 const response = await axios.post(
                     "https://ecommerce.olipiskandar.com/api/v1/auth/signup",
-                    credentials
+                     credentials
                 );
+                console.log(response)
                 const token = response.data.access_token;
-
                 localStorage.setItem("token", token);
                 commit("SET_TOKEN", token);
-                return response.data.success;
+                return true
             } catch (error) {
-                console.log(error);
                 return error;
             }
         },
-        logout({ commit }) {
-            // localStorage.removeItem('token');
-            // commit("SET_TOKEN", "");
+        async getusertoken({commit}, token) {
+            try {
+                const response = await axios.get('https://ecommerce.olipiskandar.com/api/v1/user/info',
+                 {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                commit('SET_TOKEN_user', response.data);
+            } catch (error) {
+                return error;
+            }
+        },
+        logout({commit}){
             const token = localStorage.getItem('token');
             localStorage.removeItem('token');
-            commit("SET_TOKEN", '')
-            // console.log("Token removed : ", token)
+            commit("SET_TOKEN", token)
         }
-    },
+    },  
     mutations: {
-        SET_TOKEN(state, token) {
+        SET_TOKEN(state, token){
             state.token = token;
         },
-        USER_INFO(state, data) {
-            state.userData = data;
+        SET_TOKEN_user(state, token){
+            state.userdata = token;
         }
     }
 }
