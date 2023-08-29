@@ -25,7 +25,6 @@
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 cols="30" rows="2"></textarea>
                         </div>
-
                         <div class="mb-6">
                             <label for="postal_code"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Pos</label>
@@ -37,14 +36,13 @@
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Negara</label>
                             <!-- <input type="text" id="country" v-model="addAddress.country"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> -->
-                            <select id="country" v-model="addAddress" @change="fetchAllStates(addAddress.country)"
+                            <select id="country" v-model="addAddress.country" @change="fetchAllStates(addAddress.country)"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <option v-for="country in countries" :key="country.id" :value="country.id">
                                     {{ country.name }}
                                 </option>
                             </select>
                         </div>
-                        {{ addAddress }}
                         <div class="mb-6">
                             <label for="state"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinsi</label>
@@ -318,8 +316,8 @@ export default {
         phone: null,
       },
 
-      //tambah alamat
-      // address:addAddress.address,
+      // //tambah alamat
+      // address :addAddress.address,
       // postal_code:addAddress.postal_code,
       // country:addAddress.country,
       // state:addAddress.state,
