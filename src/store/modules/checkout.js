@@ -116,7 +116,7 @@ const checkout = {
                         }
                     });
                 commit("SET_ORDERDATA", response.data);
-                location.pathname = '/order/' + response.data.order_code
+                location.pathname = '/transaksi/' + response.data.order_code
                 console.log(response.data)
             }
             catch (err) {

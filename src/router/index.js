@@ -60,6 +60,13 @@ const router = createRouter({
       props:true
     },
     {
+      path: '/transaksi/:order_code',
+      name: 'Transaksi',
+      component: () => import('../views/Transaksi.vue'),
+      beforeEnter: cekToken,
+      props:true
+    },
+    {
       path: '/login',
       name: 'login',
       // route level code-splitting

@@ -32,6 +32,7 @@
              <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                <!-- <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> -->
                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{getid.data.name}}</h1>
+               <br>
                <div class="flex mb-4">
                  <span class="flex items-center">
                    <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 text-red-500" viewBox="0 0 24 24">
@@ -52,8 +53,8 @@
                    <!-- <span class="text-gray-600 ml-3">4 Reviews</span> -->
                  </span>
                </div>
-               <!-- <p class="leading-relaxed" v-if="getid.data.description.length < 50 ">{{getid.data.description}}</p>
-               <p class="leading-relaxed" v-else>{{getid.data.description.substring(0,400)+"...."}}</p> -->
+               <p class="leading-relaxed" v-if="getid.data.description.length < 50 ">{{getid.data.description}}</p>
+               <p class="leading-relaxed" v-else>{{getid.data.description.substring(0,400)+"...."}}</p>
                <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                 
                </div>

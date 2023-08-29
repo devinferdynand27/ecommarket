@@ -12,7 +12,6 @@
             <table class="w-full">
               <thead>
                 <tr>
-                  <th class="text-left font-semibold"></th>
                   <th class="text-left font-semibold">produk</th>
                   <th class="text-left font-semibold">Harga</th>
                   <th class="text-left  font-semibold">Jumlah</th>
@@ -22,12 +21,7 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>
-                    <div class="flex items-center">
-                      <input  value="apa"  @click="pilih(allcart.cart_id)" v-model="pilihiid" type="checkbox" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                  </div>
-          
-                  </td>
+
                   <td class="py-4">
                     <img
                       class="h-16 w-16 mr-4"
