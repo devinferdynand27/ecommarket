@@ -1,40 +1,39 @@
 <template>
-    <h2 style="color: black; padding-left: 100px;" class="text-2xl font-bold tracking-tight text-gray-900"> keranjang    </h2>
- <div class="h-screen bg-white-100 pt-20">
-  <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
-      <div class="rounded-lg md:w-2/3">
-        <div v-for="carts in getcart.cart_items" :key="carts.cart_id">
-          <div
-            class="bg-white rounded-lg shadow-md p-6 mb-4"
-            v-for="allcart in carts"
-            :key="allcart.cart_id"
-          >
-            <table class="w-full">
-              <thead>
-                <tr>
-                  <th class="text-left font-semibold">produk</th>
-                  <th class="text-left font-semibold">Harga</th>
-                  <th class="text-left  font-semibold">Jumlah</th>
-                  <th class="text-left font-semibold">stock</th>
-                  <th class="text-left  font-semibold">Aksi</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
 
-                  <td class="py-4">
-                    <img
-                      class="h-16 w-16 mr-4"
-                      src="https://via.placeholder.com/150"
-                      alt="Product image"
-                    />
-                    <br />
-                    <span class="font-semibold mb-9">
-                      {{ allcart.name }}
-                    </span>
-                  </td>
-                  <td class="py-4">{{ allcart.regular_price }}</td>
-                  <td class="py-4">
+  <div v-if="getcart.cart_items.data.length == 0">
+    <br>
+    <center>
+      <div class="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-300" role="alert">
+        <span class="font-medium">Barang Tidak Ada</span>  Masukan Barang Belanjaan Anda Sekarang
+      </div>
+    </center>
+     <center>
+      <img src="../assets/nobarang.png" style="width: 40%;">
+     </center>
+  <center>
+    <br>
+    <button @click="belanja"  style="background: orange;" type="button" class="focus:outline-none text-white bg-yellow-400 hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:focus:ring-yellow-900">Yuk Belanja Sekarang</button>
+  </center>
+  </div>
+
+  <div class="container mx-auto px-4 py-8">
+    <center>
+      <div class="p-4 mb-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400" role="alert">
+        <span class="font-medium">Keranjang</span> Keranjang Anda Yuk Segara Checkout dan Beli Sekarang
+      </div>
+    </center>
+    <div class="mt-8">
+        <div v-for="carts in getcart.cart_items" :key="carts.cart_id">
+          <div   v-for="allcart in carts"
+          :key="allcart.cart_id" class="flex flex-wrap  md:flex-row border-b border-gray-400 py-4">
+            <div class="flex-shrink-0">
+                <img src="https://picsum.photos/id/237/150/150" style="border-radius: 20px;" alt="Product image" class="w-32 h-32 object-cover">
+            </div>
+            <div class="mt-4 md:mt-0 md:ml-6 pl-4">
+                <h2 class="text-lg font-bold">{{allcart.name}}</h2>
+                <p class="mt-2 text-gray-600">stok : {{allcart.qty}}</p>
+                <div class="mt-4 flex items-center">
+                    <span class="mr- text-gray-600">Quantity:</span> &nbsp; &nbsp; &nbsp;
                     <div class="flex items-center">
                       &nbsp;
                       <button style="border: 1px solid orange;"
@@ -53,44 +52,28 @@
                         +
                       </button>
                     </div>
-                  </td>
-                  <td class="py-4"> &nbsp; {{ allcart.stock }}</td>
-                  <td class="py-4">
-                    <button @click="deletecart(allcart.cart_id)"
-                      style="background: orange; color: white"
-                      class="bg-transparentfont-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded"
-                    >
-                      Hapus
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+                </div><br>
+                <span style="float: right;" class="ml-auto font-bold ">Rp . {{allcart.regular_price*allcart.qty}}</span>
+            </div>
+             <span style="padding-left: 50%;"> <br> <button @click="deletecart(allcart.cart_id)"
+              style="background: orange; color: white; width: 120px;"
+              class="bg-transparentfont-semibold hover:text-white py-2 px-4 border hover:border-transparent rounded"
+            >
+              Hapus
+            </button></span>
         </div>
-      </div>
-      <!-- Sub total -->
-      <div  class="mt-6 h-full rounded-lg border bg-white p-12 shadow-md md:mt-0 md:w-1/3">
-          <div class="mb-2 flex justify-between">
-              <p class="text-gray-700">Subtotal :  </p>
-              <p class="text-gray-700">{{ show(getcart.cart_items) }}</p>
-          </div>
-          <hr class="my-4" />
-          <div class="flex justify-between">
-              <p class="text-lg font-bold">Total</p>
-              <div class="">
-                  <p class="mb-1 text-lg font-bold">$134.98 USD</p>
-                  <p class="text-sm text-gray-700">including VAT</p>
-              </div>
-          </div>
-          <button style="background: orange;" @click="belicheckout"
-              class="mt-6 w-full rounded-md bg-slate-800 py-1.5 font-medium text-blue-50 hover:bg-slate-900">Check
-              out</button>
-      </div>
-  </div>
+        </div>
+    </div>
+    
+    <div v-if="getcart.cart_items.data.length != 0" class="flex justify-end items-center mt-8">
+      <button type="button" @click="checkout" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" style="width: 100%; background: green;">Beli Sekarang</button>
+        <span class="text-gray-600 mr-4">Subtotal:</span>
+        <span class="text-xl font-bold">{{ show(getcart.cart_items) }}</span>
+    </div>
 </div>
 </template>
 <script>
+import checkout from "@/store/modules/checkout";
 import { mapActions, mapGetters, mapState } from "vuex";
 export default {
   data() {
@@ -113,6 +96,12 @@ export default {
       });
       return total
     },
+    belanja(){
+      this.$router.push('/');
+    },
+    checkout(){
+      this.$router.push('/checkout');
+    }
   },
 };
 </script>
