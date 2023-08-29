@@ -300,7 +300,7 @@
                        <div class="w-full flex">
                          <img
                            class="w-28 mx-auto"
-                           src="/img/cash_on_delivery.png"
+                           src="https://5minvideo.id/images/cod-logo.png"
                            alt="Cash on Delivery"
                          />
                        </div>
