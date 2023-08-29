@@ -1,273 +1,300 @@
 <template>
-  <!-- <div v-for="item in getaddress" :key="item.user_id">
-         {{ item.address }}
-    </div> -->
+  <div class="dark:text-white">
+    <div class="flex flex-col">
+      <div class="flex flex-col">
 
-  <div class="container px-5 py-6 mx-auto">
-    <b>Checkout</b><br/><br/>
-    <body class="p-4 flex shadow-md bordered justify-center bg-white-100">
 
-      <div v-show="valuesmodal == false">
-        <button @click="tutup()" style="background: red; float: right;" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          <i class="bi bi-x"></i>
+        <button  v-show="showdev == false" @click="show">
+          Submit
         </button>
-        <br>
-        <div>
-          <form @submit.prevent="submit">
-          <div class="mb-6">
-              <label for="address" style="width:300px;"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
-              <textarea id="address" v-model="addAddress.address"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  cols="30" rows="2"></textarea>
-          </div>
-          <div class="mb-6">
-              <label for="postal_code"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Pos</label>
-              <input type="text" id="postal_code" v-model="addAddress.postal_code"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          </div>
-          <div class="mb-6">
-              <label for="country"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Negara</label>
-              <!-- <input type="text" id="country" v-model="addAddress.country"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> -->
-              <select id="country" v-model="addAddress.country" @change="fetchAllStates(addAddress.country)"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option v-for="country in countries" :key="country.id" :value="country.id">
-                      {{ country.name }}
-                  </option>
-              </select>
-          </div>
-          <div class="mb-6">
-              <label for="state"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinsi</label>
-              <!-- <input type="text" id="state" v-model="addAddress.state"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> -->
-              <select id="state" v-model="addAddress.state" @change="fetchAllCities(addAddress.state)"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option v-for="state in states" :key="state.id" :value="state.id">
-                      {{ state.name }}
-                  </option>
-              </select>
-          </div>
-          <div class="mb-6">
-              <label for="city"
-                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kota</label>
-              <!-- <input type="text" id="city" v-model="addAddress.city"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> -->
-              <select id="city" v-model="addAddress.city"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                  <option v-for="city in cities" :key="city.id" :value="city.id">
-                      {{ city.name }}
-                  </option>
-              </select>
-          </div>
-          <div class="mb-6">
-              <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
-                  Telepon</label>
-              <input type="text" id="phone" v-model="addAddress.phone"
-                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-          </div>
-          <button>kirim</button>
-        </form>
-      </div>
+
 
       </div>
+      <div class="px-4 w-full xl:max-w-7xl xl:mx-auto">
 
-      <form v-show="valuesmodal == true" class="w-full max-w-screen-md mx-auto">
-        <fieldset class="">
-          <div
-            class="flex items-center justify-between py-4 border-b border-gray-300"
-          >
-            <a href="#" class="font-medium text-gray-500 hover:text-gray-700"
-              >Alamat Pengirim</a
-            >
-          </div>
-          <br />
-          <div class="grid sm:grid-cols-4 gap-6">
-            <label
-              :for="item.id"
-              v-for="item in address"
-              :key="item.id"
-              class="relative flex flex-col bg-white p-5 rounded-lg shadow-md cursor-pointer"
-            >
-              <span
-                style="font-size: 10px"
-                class="font-semibold text-gray-500 leading-tight uppercase mb-3"
-                >{{ item.address }}</span
-              >
-              <span
-                style="font-size: 10px"
-                class="font-semibold text-gray-500 leading-tight uppercase mb-3"
-                >{{ item.city }} , {{ item.state }} , {{ item.country }}
-              </span>
-              <span
-                style="font-size: 10px"
-                class="font-semibold text-gray-500 leading-tight uppercase mb-3"
-                >{{ item.phone }}</span
-              >
-              <input
-                @click="show(item.id)"
-                type="radio"
-                :checked="item.default_shipping == 1"
-                name="plan"
-                :id="item.id"
-                value="hobby"
-                class="absolute h-0 w-0 appearance-none"
-              />
-              <span
-                aria-hidden="true"
-                class="hidden absolute inset-0 border-2 border-green-500 bg-green-200 bg-opacity-10 rounded-lg"
-              >
-                <span
-                  class="absolute top-4 right-4 h-6 w-6 inline-flex items-center justify-center rounded-full bg-green-200"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-5 w-5 text-green-600"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                      clip-rule="evenodd"
-                    />
-                  </svg>
-                </span>
-              </span>
-            </label>
-          </div>
-        </fieldset>
-      </form>
-    </body>
-    <br />
-    <center>
-      <button
-        @click="modalshow" style="width: 100%; background: green;"
-        data-modal-target="authentication-modal"
-        data-modal-toggle="authentication-modal"
-        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
-      >
-        Tambah Alamat Pengirim
-      </button>
-    </center>
-    <fieldset class="">
-      <div
-        class="flex items-center justify-between py-4 border-b border-gray-300"
-      >
-        <a href="#" class="font-medium text-gray-500 hover:text-gray-700"
-          >Alamat Penerima</a
-        >
-      </div>
-      <br />
-      <div class="grid sm:grid-cols-4 gap-6">
-        <label
+         <div v-show="showdev == true">
+             <form @submit.prevent="tambah">
+              <div class="flex flex-col">
+                <div class="p-5 rounded-xl bg-white dark:bg-slate-900 sm:w-[620px] my-auto sm:mx-auto">
+                    <h2 class="text-center font-semibold text-lg mb-6">Tambah Alamat</h2>
+                    <div>
+                        <div class="mb-6">
+                            <label for="address"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat</label>
+                            <textarea id="address" v-model="addAddress.address"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                cols="30" rows="2"></textarea>
+                        </div>
 
-          class="relative flex flex-col bg-white p-5 rounded-lg shadow-md cursor-pointer"
-        >
-          <span
-            style="font-size: 10px"
-            class="font-semibold text-gray-500 leading-tight uppercase mb-3"
-            >deimde</span
-          >
-          <span
-            style="font-size: 10px"
-            class="font-semibold text-gray-500 leading-tight uppercase mb-3"
-            >bandung
-          </span>
-          <span
-            style="font-size: 10px"
-            class="font-semibold text-gray-500 leading-tight uppercase mb-3"
-            >devin</span
-          >
-          <input
-            @click="show()"
-            type="radio"
+                        <div class="mb-6">
+                            <label for="postal_code"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kode Pos</label>
+                            <input type="text" id="postal_code" v-model="addAddress.postal_code"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </div>
+                        <div class="mb-6">
+                            <label for="country"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Negara</label>
+                            <!-- <input type="text" id="country" v-model="addAddress.country"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> -->
+                            <select id="country" v-model="addAddress" @change="fetchAllStates(addAddress.country)"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option v-for="country in countries" :key="country.id" :value="country.id">
+                                    {{ country.name }}
+                                </option>
+                            </select>
+                        </div>
+                        {{ addAddress }}
+                        <div class="mb-6">
+                            <label for="state"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Provinsi</label>
+                            <!-- <input type="text" id="state" v-model="addAddress.state"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> -->
+                            <select id="state" v-model="addAddress.state" @change="fetchAllCities(addAddress.state)"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option v-for="state in states" :key="state.id" :value="state.id">
+                                    {{ state.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="city"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kota</label>
+                            <!-- <input type="text" id="city" v-model="addAddress.city"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"> -->
+                            <select id="city" v-model="addAddress.city"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option v-for="city in cities" :key="city.id" :value="city.id">
+                                    {{ city.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nomor
+                                Telepon</label>
+                            <input type="text" id="phone" v-model="addAddress.phone"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                        </div>
   
-            name="plan"
+                    </div>
   
-            value="hobby"
-            class="absolute h-0 w-0 appearance-none"
-          />
-          <span
-            aria-hidden="true"
-            class="hidden absolute inset-0 border-2 border-green-500 bg-green-200 bg-opacity-10 rounded-lg"
-          >
-            <span
-              class="absolute top-4 right-4 h-6 w-6 inline-flex items-center justify-center rounded-full bg-green-200"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                class="h-5 w-5 text-green-600"
+                    <div class="flex justify-end">
+                        <button @click="tutupshow"
+                            class="text-white bg-yellow-500 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">
+                            Batal
+                        </button>
+                        <button
+                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Tambah Alamat
+                        </button>
+                    </div>
+                    <!-- {{ addAddress }} -->
+                </div>
+            </div>
+             </form>
+         </div>
+
+
+        <form v-show="showdev == false" @submit.prevent="orderadd">
+          <h2 class="text-center text-2xl my-4 font-semibold">Checkout</h2>
+          <div v-if="!!address" class="my-6">
+            <h2 class="font-semibold text-lg">Alamat Pengiriman</h2>
+            <div class="">
+              <div
+                class=""
+                v-for="addressData in address"
+                :key="addressData.id"
               >
-                <path
-                  fill-rule="evenodd"
-                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                  clip-rule="evenodd"
+                <input
+                  v-model="shipping_address_id"
+                  type="radio"
+                  name="shipping_address_id"
+                  :id="'shipping_address_' + addressData.id"
+                  :value="addressData.id"
+                  class="hidden"
                 />
-              </svg>
-            </span>
-          </span>
-        </label>
+                <label :for="'shipping_address_' + addressData.id">
+                  <div
+                    class="m-3 border dark:border-gray-600 p-4 rounded-lg"
+                    :class="{
+                      'border-4': shipping_address_id == addressData.id,
+                      'border-blue-400': shipping_address_id == addressData.id,
+                      'dark:border-blue-600':
+                        shipping_address_id == addressData.id,
+                      'bg-blue-600': shipping_address_id == addressData.id,
+                      'bg-opacity-20': shipping_address_id == addressData.id,
+                    }"
+                  >
+                    <div>
+                      {{ addressData.address }}, {{ addressData.postal_code }}
+                      <br />
+                      {{ addressData.city }}, {{ addressData.state }},
+                      {{ addressData.country }} <br />
+                      {{ addressData.phone }}
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div v-if="!!address" class="my-6">
+            <h2 class="font-semibold text-lg">Alamat Penagihan</h2>
+            <div class="">
+              <div
+                class=""
+                v-for="addressData in address"
+                :key="addressData.id"
+              >
+                <input
+                  v-model="billing_address_id"
+                  type="radio"
+                  name="billing_address"
+                  :id="'billing_address_' + addressData.id"
+                  :value="addressData.id"
+                  class="hidden"
+                />
+                <label :for="'billing_address_' + addressData.id">
+                  <div
+                    class="m-3 border dark:border-gray-600 p-4 rounded-lg"
+                    :class="{
+                      'border-4': billing_address_id == addressData.id,
+                      'border-blue-400': billing_address_id == addressData.id,
+                      'dark:border-blue-600':
+                        billing_address_id == addressData.id,
+                      'bg-blue-600': billing_address_id == addressData.id,
+                      'bg-opacity-20': billing_address_id == addressData.id,
+                    }"
+                  >
+                    <div>
+                      {{ addressData.address }}, {{ addressData.postal_code }}
+                      <br />
+                      {{ addressData.city }}, {{ addressData.state }},
+                      {{ addressData.country }} <br />
+                      {{ addressData.phone }}
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col"></div>
+          <div class="my-6">
+            <h2 class="font-semibold text-lg">Opsi Pengiriman</h2>
+            <div class="flex flex-wrap">
+              <div class="">
+                <input
+                  v-model="delivery_type"
+                  type="radio"
+                  name="delivery_type"
+                  id="standard"
+                  value="standard"
+                  class="hidden"
+                />
+                <label for="standard">
+                  <div
+                    class="m-3 border dark:border-gray-600 p-4 rounded-lg"
+                    :class="{
+                      'border-4': delivery_type == 'standard',
+                      'border-blue-400': delivery_type == 'standard',
+                      'dark:border-blue-600': delivery_type == 'standard',
+                      'bg-blue-600': delivery_type == 'standard',
+                      'bg-opacity-20': delivery_type == 'standard',
+                    }"
+                  >
+                    <div>
+                      <h2 class="font-semibold text-lg">Standard</h2>
+                    </div>
+                  </div>
+                </label>
+              </div>
+              <div class="">
+                <input
+                  v-model="delivery_type"
+                  type="radio"
+                  name="delivery_type"
+                  id="express"
+                  value="express"
+                  class="hidden"
+                />
+                <label for="express">
+                  <div
+                    class="m-3 border dark:border-gray-600 p-4 rounded-lg"
+                    :class="{
+                      'border-4': delivery_type == 'express',
+                      'border-blue-400': delivery_type == 'express',
+                      'dark:border-blue-600': delivery_type == 'express',
+                      'bg-blue-600': delivery_type == 'express',
+                      'bg-opacity-20': delivery_type == 'express',
+                    }"
+                  >
+                    <div>
+                      <h2 class="font-semibold text-lg">Express</h2>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="my-6">
+            <h2 class="font-semibold text-lg">Opsi Pembayaran</h2>
+            <div class="flex flex-wrap">
+              <div class="">
+                <input
+                  v-model="payment_type"
+                  type="radio"
+                  name="payment_type"
+                  id="cash_on_delivery"
+                  value="cash_on_delivery"
+                  class="hidden"
+                />
+                <label for="cash_on_delivery">
+                  <div
+                    class="m-3 border dark:border-gray-600 p-4 rounded-lg"
+                    :class="{
+                      'border-4': payment_type == 'cash_on_delivery',
+                      'border-blue-400': payment_type == 'cash_on_delivery',
+                      'dark:border-blue-600':
+                        payment_type == 'cash_on_delivery',
+                      'bg-blue-600': payment_type == 'cash_on_delivery',
+                      'bg-opacity-20': payment_type == 'cash_on_delivery',
+                    }"
+                  >
+                    <div class="w-full flex">
+                      <img
+                        class="w-28 mx-auto"
+                        src="/img/cash_on_delivery.png"
+                        alt="Cash on Delivery"
+                      />
+                    </div>
+                    <div>
+                      <h2 class="font-semibold text-lg">Cash on Delivery</h2>
+                    </div>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap" v-if="cart.cart_items">
+            <div class="border p-2 bg-gray-200 dark:bg-gray-900">
+              Jumlah yang harus dibayar
+            </div>
+            <div class="border p-2 bg-gray-100 dark:bg-gray-800">
+              {{ "Rp. " + totalPrice(cart.cart_items.data) }}
+            </div>
+          </div>
+          <div class="my-4">
+            <button
+              type="submit"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center mr-1 md:mr-1 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Pesan sekarang
+            </button>
+          </div>
+        </form>
+        <!-- {{ cart_item_ids }} -->
       </div>
-    </fieldset><br>
-
-
-    <br><br>
-    <b class="mb-2">Metode Pembayaran</b><br><br>
-    <hr class="mb-2">
-    <label
-    style="width: 150px;"
-    class="relative flex flex-col bg-white p-5 rounded-lg shadow-md cursor-pointer"
-  >
-  <img style="width: 150px;" src="https://i.pinimg.com/474x/b9/d8/84/b9d884233c66866745d0879bf459585a.jpg" alt="">
-    
-    <input
-      @click="show()"
-      type="radio"
-
-      name="plan"
-
-      value="hobby"
-      class="absolute h-0 w-0 appearance-none"
-    />
-    <span
-      aria-hidden="true"
-      class="hidden absolute inset-0 border-2 border-green-500 bg-green-200 bg-opacity-10 rounded-lg"
-    >
-      <span
-        class="absolute top-4 right-4 h-6 w-6 inline-flex items-center justify-center rounded-full bg-green-200"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 20 20"
-          fill="currentColor"
-          class="h-5 w-5 text-green-600"
-        >
-          <path
-            fill-rule="evenodd"
-            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-            clip-rule="evenodd"
-          />
-        </svg>
-      </span>
-    </span>
-  </label>
-  <br>
-  <button
-  @click="modalshow" style="width: 100%; background: green;"
-  data-modal-target="authentication-modal"
-  data-modal-toggle="authentication-modal"
-  class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-  type="button"
->
-  Proses
-</button>
+    </div>
   </div>
 </template>
 
@@ -276,72 +303,109 @@ import { onMounted } from "vue";
 import { mapActions, mapState } from "vuex";
 
 export default {
-    data() {
-        return {
-            valuesmodal : true,
-            showAddAddress: null,
-            addAddress: {
-                id: null,
-                address: null,
-                postal_code: null,
-                country: null,
-                state: null, 
-                city: null, 
-                phone: null
-            },
-        }
-    },
-    computed: {
-        ...mapState('checkout', ['address', 'countries', 'states', 'cities'])
-    },
-    methods: {
+  data() {
+    return {
+      showdev : false,
+      showAddAddress: null,
 
-      async submit() {
-          const alamat = {
-                name: this.name,
-                email: this.email,
-                phone: this.phone,
-                password: this.password,
-                confirm_password: this.confirm_password
-            };
-        },
+      addAddress: {
+        id: null,
+        address: null,
+        postal_code: null,
+        country: null,
+        state: null,
+        city: null,
+        phone: null,
+      },
 
-        ...mapActions('checkout', ['fetchAddress']),
-        ...mapActions('checkout', ['fetchAllCountries']),
-        ...mapActions('checkout', ['fetchAllStates']),
-        ...mapActions('checkout', ['fetchAllCities']),
-       
-        modalshow(){
-         this.valuesmodal = false
-        },
-        tutup(){
-         this.valuesmodal = true
+      //tambah alamat
+      // address:addAddress.address,
+      // postal_code:addAddress.postal_code,
+      // country:addAddress.country,
+      // state:addAddress.state,
+      // city:addAddress.city,
+      // phone:addAddress.phone,
+      // form data
+      shipping_address_id: null,
+      billing_address_id: null,
+      delivery_type: "",
+      payment_type: "",
+      // cart_item_ids: [],
+      transactionId: null,
+      receipt: null,
+    };
+  },
+  computed: {
+    ...mapState("cart", ["cart"]),
+    ...mapState("checkout", [
+      "address",
+      "countries",
+      "states",
+      "cities",
+      "cart_item_ids",
+    ]),
+  },
+  methods: {
+    ...mapActions("checkout", [
+      "fetchAddress",
+      "fetchAllCountries",
+      "fetchAllStates",
+      "fetchAllCities",
+      "fetch_cart_item_ids",
+      "order",
+    ]),
+
+    tambah(){
+      console.log(
+        {
+      address:addAddress.address,
+      postal_code:addAddress.postal_code,
+      country:addAddress.country,
+      state:addAddress.state,
+      city:addAddress.city,
+      phone:addAddress.phone,
         }
+      )
     },
-    beforeMount() {
-        this.fetchAddress();
-        this.fetchAllCountries();
+    show(){
+      this.showdev = true
     },
-    created() {
+     tutupshow(){
+      this.showdev = false
     },
-    setup(props, context) {
-        onMounted(() => {
-            try {
-                context.emit("id-menu", 0)
-            } catch (error) {
-                console.log(error)
-            }
-        })
+    totalPrice(param) {
+      let total = 0;
+      param.forEach((e) => {
+        total += e.regular_price * e.qty;
+      });
+
+      return total;
     },
-}
+    orderadd() {
+      this.order({
+        shipping_address_id: this.shipping_address_id,
+        billing_address_id: this.billing_address_id,
+        delivery_type: this.delivery_type,
+        payment_type: this.payment_type,
+        cart_item_ids: this.cart_item_ids,
+        transactionId: this.transactionId,
+        receipt: this.receipt,
+      });
+    },
+  },
+  beforeMount() {
+    this.fetchAddress();
+    this.fetchAllCountries();
+    this.fetch_cart_item_ids();
+  },
+  setup(props, context) {
+    onMounted(() => {
+      try {
+        context.emit("id-menu", 0);
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  },
+};
 </script>
-<style>
-input[type="radio"]:checked + span {
-  display: block;
-}
-</style>
-
-<!-- // shiping adres
-biling adress
-delivery option
-payment -->

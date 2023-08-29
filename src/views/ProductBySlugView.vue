@@ -52,8 +52,8 @@
                    <!-- <span class="text-gray-600 ml-3">4 Reviews</span> -->
                  </span>
                </div>
-               <p class="leading-relaxed" v-if="getid.data.description.length < 50 ">{{getid.data.description}}</p>
-               <p class="leading-relaxed" v-else>{{getid.data.description.substring(0,400)+"...."}}</p>
+               <!-- <p class="leading-relaxed" v-if="getid.data.description.length < 50 ">{{getid.data.description}}</p>
+               <p class="leading-relaxed" v-else>{{getid.data.description.substring(0,400)+"...."}}</p> -->
                <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                 
                </div>
