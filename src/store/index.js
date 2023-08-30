@@ -7,6 +7,7 @@ import brand from "./modules/brand";
 import cart from "./modules/cart";
 import checkout from "./modules/checkout";
 import ordertransaksi from "./modules/ordertransaksi";
+import dashboard from "./modules/dashboard";
 
 export default createStore({
     modules: {
@@ -16,6 +17,7 @@ export default createStore({
         brand,
         cart,
         checkout,
-        ordertransaksi
+        ordertransaksi,
+        dashboard
     }
 });

@@ -63,10 +63,11 @@ import { onMounted } from "vue";
 import { mapActions } from "vuex";
 
 export default {
+    props:['slug'],
     data() {
         return {
             email: '',
-            password: ''
+            password: '',
         }
     },
     methods: {
@@ -74,12 +75,16 @@ export default {
         async performLogin() {
             const credentials = {
                 email: this.email,
-                password: this.password
+                password: this.password,
             };
 
             const success = await this.login(credentials);
             if (success == true) {
-                this.$router.push('/')
+                if(this.slug){
+                    this.$router.push('/product/detailproduct/' + this.slug);
+                }else{
+                   this.$router.push('/')
+                }
             }
             else {
                 alert("Login failed")

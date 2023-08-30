@@ -9,6 +9,13 @@ function cekToken(to, from, next) {
     next('/login')
   }
 };
+function CekProfil(to, from, next) {
+  if (!!localStorage.getItem('token') && localStorage.getItem('token') != 'undefined') {
+    next()
+  } else {
+    next('/')
+  }
+};
 
 
 
@@ -50,13 +57,20 @@ const router = createRouter({
       path: '/profile',
       name: 'profile',
       component: () => import('../views/ProfileView.vue'),
-    
+      props:true,
+      beforeEnter: CekProfil,
     },
     {
       path: '/checkout',
       name: 'checkout',
       component: () => import('../views/CheckoutView.vue'),
       beforeEnter: cekToken,
+      props:true
+    },
+    {
+      path: '/login/terlebihdahulu/:slug',
+      name: 'logins',
+      component: () => import('../views/LoginView.vue'),
       props:true
     },
     {
@@ -69,9 +83,6 @@ const router = createRouter({
     {
       path: '/login',
       name: 'login',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/LoginView.vue')
     },
     {

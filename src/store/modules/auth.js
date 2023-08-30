@@ -56,10 +56,17 @@ const auth = {
             }
         },
         logout({commit}){
+           try{
             const token = localStorage.getItem('token');
             localStorage.removeItem('token');
             commit("SET_TOKEN", token)
-            location.reload()
+           }catch(err){
+             alert(err)
+           }
+            finally{
+                location.reload()
+            }
+
         }
     },  
     mutations: {

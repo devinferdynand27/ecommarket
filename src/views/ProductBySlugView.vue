@@ -28,7 +28,7 @@
      <section class="text-gray-700 body-font overflow-hidden bg-white">
          <div class="container px-5 py-6 mx-auto">
            <div class="lg:w-4/5 mx-auto flex flex-wrap">
-             <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="https://www.whitmorerarebooks.com/pictures/medium/2465.jpg">
+             <img alt="ecommerce" class="lg:w-1/2 w-full object-cover object-center rounded border border-gray-200" src="../assets/produck.jpeg" width="100px">
              <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
                <!-- <h2 class="text-sm title-font text-gray-500 tracking-widest">BRAND NAME</h2> -->
                <h1 class="text-gray-900 text-3xl title-font font-medium mb-1">{{getid.data.name}}</h1>
@@ -53,8 +53,7 @@
                    <!-- <span class="text-gray-600 ml-3">4 Reviews</span> -->
                  </span>
                </div>
-               <p class="leading-relaxed" v-if="getid.data.description.length < 50 ">{{getid.data.description}}</p>
-               <p class="leading-relaxed" v-else>{{getid.data.description.substring(0,400)+"...."}}</p>
+               <p class="leading-relaxed" >Belanja merupakan pemerolehan barang atau jasa dari penjual dengan tujuan membeli pada waktu itu. Belanja adalah aktivitas pemilihan dan/atau membeli. Dalam beberapa hal dianggap sebagai sebuah aktivitas kesenggangan juga ekonomi.</p>
                <div class="flex mt-6 items-center pb-5 border-b-2 border-gray-200 mb-5">
                 
                </div>
@@ -102,8 +101,8 @@ export default {
  methods:{
    ...mapActions('cart',['addtocart']),
    nontifikasi(){
-     alert('login hela bro');
-     this.$router.push('/login/' + this.slug);
+     alert('Mohon Login terlebih dahulu ');
+     this.$router.push('/login/terlebihdahulu/'+this.slug);
    },
    tambah(){
          this.counter++

@@ -155,7 +155,7 @@ export default {
             let cnfrm = confirm('Apakah Anda yakin ingin melakukan logout?');
             if (cnfrm) {
                 this.logout();
-                this.$router.push('/login');
+                this.$router.push('/');
             }
         },
         cart(){
@@ -165,9 +165,6 @@ export default {
         navToggle() {
             $("#navbar-sticky").slideToggle();
         },
-        // toggle_cartSide(){
-        //     $('#cart-side').toggle();
-        // }
     },
     setup(props) {
         const rl = ref([

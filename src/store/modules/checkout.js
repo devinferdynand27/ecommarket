@@ -10,7 +10,8 @@ const checkout = {
         cities: [],
 
         cart_item_ids: [],
-        orderData: []
+        orderData: [],
+        delete: []
     },
     getters: {
     },
@@ -32,6 +33,25 @@ const checkout = {
             }
         },
 
+
+        async fectdeleteaddres({ commit ,dispatch},id) {
+            const token = localStorage.token;
+            try {
+                const getAddress = await axios.get(`https://ecommerce.olipiskandar.com/api/v1/user/address/delete/${id}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`
+                        }
+                    });
+                commit("SET_DELETE", getAddress.data.data);
+            }
+            catch (err) {
+                console.log(err);
+            }
+            finally{
+                dispatch('checkout/fetchAddress', null, {root: true})
+            }
+        },
 
         async fetchAllCountries({ commit }) {
             try {
@@ -146,6 +166,9 @@ const checkout = {
         },
         SET_ORDERDATA(state, data) {
             state.orderData = data;
+        },
+        SET_DELETE(state, data) {
+            state.delete = data;
         },
     }
 }
