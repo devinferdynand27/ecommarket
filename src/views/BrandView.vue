@@ -1,15 +1,14 @@
-<template>
+<template><br>
     <div class="min-h-screen dark:text-white">
         <div class="flex">
             <div class="mx-4 xl:max-w-7xl xl:mx-auto">
-                <h2 class="text-center text-2xl my-4 font-semibold">
-                    Halaman Brand
-                </h2>
-                <div>
-                    <p>
+              <center>
+                <div class="container">
+                    <p style="float: left; padding-left: 50px;">
                         Brands total : {{ brands.length }}
-                    </p>
+                    </p><br>
                 </div>
+              </center>
                 <div class="flex flex-wrap justify-center" >
                     <div v-for="brand in brands" :key="brand.id">
                         <!-- <RouterLink :to="'/brand/' + brand"> -->
@@ -37,20 +36,24 @@
             </div>
         </div>
     </div>
-    <!-- {{ categories }} -->
 </template>
 
 <script>
 import { onMounted } from "vue";
-import { mapState } from "vuex";
-
+import { mapState , mapGetters } from "vuex";
+import slidecategori from './slidecategori.vue';
 export default {
+    component:{
+        slidecategori
+    },
     mounted() {
         this.$store.dispatch("brand/fetchBrands")
+        this.$store.dispatch("category/fetchKategori");
         // this.$store.dispatch("product/fetchProduct")
     },
     computed: {
         ...mapState("brand", ['brands']),
+        ...mapGetters("category", ["getKategori"]),
         // ...mapState("product", ['products']),
         // countProduct(brand){
         //     let data = this.products.filter((e)=>{

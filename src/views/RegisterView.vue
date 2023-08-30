@@ -1,6 +1,6 @@
 <template>
     <section class="bg-gray-100 dark:bg-gray-900">
-      <div class="flex flex-col px-9 items-center justify-center">
+      <div class="flex flex-col px-9 items-center ">
         <br /><br /><br /><br /><br />
         <div
           class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
@@ -87,29 +87,20 @@
                 />
               </div>
               <button
-                style="background: rgb(0, 0, 255)"
-                @click="$emit('isLogin', true)"
+                style="background:  orange"
+               
                 type="submit"
                 class="w-full text-white hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Sign in
+                Daftar
               </button>
-              <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-                Belum Punya akun ?
-                <RouterLink to="/register">
-                  <a
-                    href="#"
-                    class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                    >Register</a
-                  >
-                </RouterLink>
-              </p>
             </form>
           </div>
         </div>
       </div>
       <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
     </section>
+    <!-- @click="$emit('isLogin', true)" -->
   </template>
   <script>
   import { mapActions, mapGetters } from "vuex";
